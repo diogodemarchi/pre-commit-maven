@@ -22,8 +22,12 @@ def execute(cmd, **kwargs):
     kwargs.setdefault("universal_newlines", True)
     kwargs.setdefault("shell", True)
     kwargs.setdefault("bufsize", 1)
+    
+    cmd_str = " ".join(cmd)
+    
+    print(f"Running command {cmd_str} with kwargs {kwargs}")
 
-    process = subprocess.Popen(" ".join(cmd), **kwargs)
+    process = subprocess.Popen(cmd_str, **kwargs)
     stdout, stderr = process.communicate()
 
     return ExecutionResult(process.returncode, stdout, stderr)
